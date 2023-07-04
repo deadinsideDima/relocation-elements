@@ -16,7 +16,37 @@ namespace RelocationElements
         /// <exception cref="ArgumentException">Thrown when source array is empty.</exception>
         public static void MoveToTail(int[]? source, int value)
         {
-            throw new NotImplementedException("You need to implement this function.");
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (source.Length == 0)
+            {
+                throw new ArgumentException("Array is empty", nameof(source));
+            }
+
+            int j = source.Length - 1;
+            while (source[j] == value)
+            {
+                j--;
+            }
+
+            for (int i = 0; i < j; i++)
+            {
+                while (source[i] == value)
+                {
+                    int k = i;
+                    while (k < j)
+                    {
+                        source[k] = source[k + 1];
+                        k++;
+                    }
+
+                    source[k] = value;
+                    j--;
+                }
+            }
         }
     }
 }
